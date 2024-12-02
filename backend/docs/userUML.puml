@@ -1,0 +1,69 @@
+@startuml
+!theme aws-orange
+
+
+"controller.UserController" ---> "service.UserService" : Manage user data
+"service.UserService" ---> "repository.UserRepository" : Access data through the repository
+"repository.UserRepository" ...> "model.User" : Stores and retrieves user data
+
+package "controller" {
+    class UserController {
+        - userService : UserService
+
+        + UserController(userService: UserService)
+        + getAll() : ResponseEntity<List<UserDTO>>
+        + getById(id : String) : ResponseEntity<UserDTO>
+        + findByNameContaining(partialName : String) : ResponseEntity<List<UserDTO>>
+        + getAllAttributes(authentication : OAuth2AuthenticationToken) : Map<String, Object>
+        + getKeyAttributes(authentication : OAuth2AuthenticationToken) : Map<String, Object>
+        + createNewUserFromOAuth(authentication : OAuth2AuthenticationToken) : ResponseEntity<UserDTO>
+    }
+}
+
+package "model" {
+    class User {
+        - id : String
+        - username : String
+        - name : String
+        - email : String
+
+        + User(id : String, username : String, name : String, email : String)
+        + getId() : String
+        + getUsername() : String
+        + getEmail() : String
+        + getName() : String
+    }
+}
+
+package "repository" {
+    interface UserRepository {
+        + findByNameContaining(name : String) : List<User>
+        + findByName(name : String) : Optional<User>
+        + somePeculiarLogic() : List<User>
+    }
+}
+
+package "service" {
+    class UserService {
+        - userRepository : UserRepository
+
+        + UserService(userRepository: UserRepository)
+        + getAll() : List<User>
+        + storeUser(user : User) : User
+        + createUser(createUserDTO : CreateUserDTO) : User
+        + getById(userId : String) : Optional<User>
+        + findByNameContaining(partialName : String) : List<User>
+        + getLoggedInUser() : Optional<User>
+    }
+}
+
+note right of "controller.UserController" : Respond to each HTTP request,\neach web request will result in a new\ninstance of a Controller (Class)
+
+note right of "service.UserService" : Give business logic\nfor user management
+
+note right of "repository.UserRepository" : Interface for MongoDB\ndata persistence
+
+note right of "model.User" :  Defines the structure of user-related data\nthat the application manages.\nThe fields represent various attributes of a user
+
+
+@enduml

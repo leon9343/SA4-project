@@ -1,0 +1,104 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'tailwindcss/utilities';
+
+.sidebar, header.header {
+    border-radius: 30px;
+    background-color: #eeeeeeaa
+}
+
+::-webkit-scrollbar {
+    display: none
+}
+
+body, html {
+    padding: 0;
+    margin: 0;
+    font: 1em Arial, Helvetica, sans-serif
+}
+
+.content {
+    height: 100vh;
+    display: grid;
+    grid:15% 80% 5%/20% 60% 20%;
+    background-image: url('./background.jpeg');
+    background-size: cover
+}
+
+header.header {
+    padding: 2rem;
+    grid-column: 1/4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 15px 0;
+    position: relative
+}
+
+header.header > h1 {
+    font-size: 4em
+}
+
+div.left-bar {
+    grid-column: 1/2;
+    grid-row: 2/3
+}
+
+div.right-bar {
+    grid-column: 3/4;
+    grid-row: 2/3
+}
+
+footer.footer {
+    grid-column: 1/4;
+    background-color: #000;
+    color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.sidebar {
+    padding: 30px 20px;
+    margin: 15px
+}
+
+div.sidebar > div.sidebar-title {
+    text-align: center;
+    font-weight: 700
+}
+
+div.left-bar > input {
+    width: -webkit-fill-available;
+    padding: 2px 0 2px 8px;
+    border: 0;
+    height: 2em;
+    border-radius: 7px;
+    margin: 5px 2px 0;
+    background-color: #ddd
+}
+
+div.simulation-list {
+    padding: 10px 8px 8px;
+    background-color: #ddd9;
+    border-radius: 7px;
+    margin-top: 10px;
+    overflow: auto;
+    max-height: 90%
+}
+
+div.simulation-list > div.simul {
+    padding: 10px;
+    border: 2px solid #777e;
+    margin: 0 2px 4px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between
+}
+
+div.simulation-list > div.simul#addSimul {
+    border-color: #24c660;
+    background-color: #24c660;
+    color: #eee
+}

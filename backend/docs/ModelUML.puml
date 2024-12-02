@@ -1,0 +1,65 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Simulation *-- City
+Block *-- City
+Block <|-- ResidentialBlock
+Block <|-- ParkBlock
+Block <|-- WaterBlock
+
+class Simulation {
+    city: City
+    averageIncome: Integer
+    commuterCost: Integer
+    population: Integer
+    isPublic: Boolean
+
+    getCity(): City
+    getAverageIncome(): Integer
+    getCommuterCost(): Integer
+    getPopulation(): Integer
+    getPublic(): Boolean
+
+    setCity(City): void
+    setAverageIncome(averageIncome): void
+    setCommuterCost(commuterCost): void
+    setPopulation(population): void
+    setPublic(public): void
+}
+
+class City {
+    name: String
+    ID: Integer
+    blocks: ArrayList<Block>
+
+    getName(): String
+    getID(): Integer
+    getBlocks(): ArrayList<Block>
+
+    setName(name): void
+    setID(ID): void
+    setBlocks(blocks): void
+}
+
+class Block {
+    coordinate: Coordinate<Integer, Integer>
+    distanceFromCenter(): Integer
+
+    getCoordinate(): Coordinate
+
+    setCoordinate(coordinate): void
+}
+
+class ResidentialBlock {
+    floorCount: Integer
+    costOfRenting: Integer
+    population: Integer
+}
+
+class ParkBlock {
+}
+
+class WaterBlock {
+}
+
+@enduml
